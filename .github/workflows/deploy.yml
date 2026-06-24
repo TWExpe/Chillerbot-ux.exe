@@ -17,27 +17,33 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Job 1: OHNE environment -> startet immer und aktiviert Pages per API.
+  # Bricht das Henne-Ei-Problem: muss laufen, bevor das geschützte
+  # github-pages-Environment im Deploy-Job greifen kann.
+  enable:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup & enable Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  # Job 2: MIT environment -> deployt das in Job 1 hochgeladene Artefakt.
   deploy:
+    needs: enable
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-        with:
-          # Aktiviert GitHub Pages automatisch per API – kein manueller Klick nötig
-          enablement: true
-
-      - name: Upload site
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Gesamtes Repo (statische PWA liegt im Wurzelverzeichnis)
-          path: .
-
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
