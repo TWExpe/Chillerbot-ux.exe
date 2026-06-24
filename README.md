@@ -17,14 +17,21 @@ danach ein App-Icon wie eine echte App (Vollbild, ohne Browserleiste).
 
 ## So bekommst du die App aufs Handy
 
-### Variante A – über GitHub Pages (empfohlen)
+### Variante A – über GitHub Pages „Deploy from a branch" (empfohlen)
 
-1. Repo-**Settings → Pages → Source = „GitHub Actions"**.
-2. Der Workflow (`.github/workflows/deploy.yml`) veröffentlicht die App bei
-   jedem Push. Die URL findest du danach unter **Settings → Pages**.
-3. URL auf dem **Handy** öffnen.
-4. **Android (Chrome):** Menü ⋮ → „App installieren".
-   **iPhone (Safari):** Teilen → „Zum Home-Bildschirm".
+Dieser Weg braucht **keine** GitHub Actions (in diesem Repo werden derzeit
+keine Actions-Jobs ausgeführt – es wird kein Runner zugewiesen). Pages liefert
+die Dateien direkt aus dem Branch aus.
+
+1. Repo-**Settings → Pages**
+2. **Build and deployment → Source: „Deploy from a branch"**
+3. **Branch:** `claude/huhu-streaming-app-6ehti4`, Ordner **`/ (root)`** → **Save**
+4. ~1 Minute warten, dann ist die App live unter
+   `https://twexpe.github.io/Chillerbot-ux.exe/`
+5. URL auf dem **Handy** öffnen → „Zum Startbildschirm hinzufügen".
+
+> Der mitgelieferte Actions-Workflow ist nur noch manuell auslösbar und für
+> diese Variante nicht nötig.
 
 ### Variante B – lokal testen
 

@@ -1,10 +1,9 @@
 name: Deploy PWA to GitHub Pages
 
+# Nur manuell auslösbar. Dieses Repo kann derzeit keine Actions-Jobs ausführen
+# (kein Runner wird zugewiesen). Empfohlen wird stattdessen die Pages-Option
+# "Deploy from a branch" (siehe README) – die braucht keine Actions.
 on:
-  push:
-    branches:
-      - claude/huhu-streaming-app-6ehti4
-      - main
   workflow_dispatch:
 
 permissions:
