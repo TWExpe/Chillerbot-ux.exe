@@ -1,6 +1,6 @@
 // Service Worker — cached die App-Hülle, damit die PWA installierbar &
 // offline startfähig ist. Inhalte von huhu.to werden NICHT gecached.
-const CACHE = 'huhu-stream-v1';
+const CACHE = 'muff1n-v2';
 const SHELL = [
   './',
   './index.html',

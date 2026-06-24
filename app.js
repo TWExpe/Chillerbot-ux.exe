@@ -1,4 +1,4 @@
-// Startseite, die gestreamt werden soll
+// Zielseite, die gestreamt werden soll
 const HOME_URL = 'https://huhu.to/';
 
 const frame = document.getElementById('frame');
@@ -25,9 +25,8 @@ function showFrame() {
 }
 
 // Viele Streaming-Seiten verbieten das Einbetten (X-Frame-Options / CSP).
-// Cross-Origin lässt sich der Fehler nicht direkt abfangen, daher:
-// Wenn der Frame nicht innerhalb einer Frist „onload" meldet, zeigen wir
-// den Fallback mit dem Direkt-Öffnen-Button.
+// Cross-Origin lässt sich der Fehler nicht direkt abfangen, daher Fallback
+// nach einer Frist: Hero mit Direkt-Öffnen-Button.
 function showFallback() {
   if (loaded) return;
   loader.classList.add('hidden');
@@ -37,28 +36,25 @@ function showFallback() {
 function loadSite() {
   showLoader();
   clearTimeout(loadTimer);
-  // Cache umgehen, damit „Neu laden" wirklich neu lädt
   frame.src = HOME_URL;
   loadTimer = setTimeout(showFallback, 6000);
 }
 
 frame.addEventListener('load', () => {
   clearTimeout(loadTimer);
-  // Wenn der Frame geladen hat, zeigen wir ihn.
   showFrame();
 });
 
 reloadBtn.addEventListener('click', loadSite);
 retryBtn.addEventListener('click', loadSite);
-openExtBtn.addEventListener('click', () => window.open(HOME_URL, '_blank', 'noopener'));
+openExtBtn.addEventListener('click', () => window.open(HOME_URL, '_blank', 'noopener,noreferrer'));
 launchBtn.setAttribute('href', HOME_URL);
 
-// Service Worker registrieren (macht die App installierbar / offline-fähig)
+// Service Worker registrieren (macht die App installierbar / offline-startfähig)
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js').catch(() => { /* egal, nicht kritisch */ });
+    navigator.serviceWorker.register('sw.js').catch(() => { /* nicht kritisch */ });
   });
 }
 
-// Los geht's
 loadSite();
