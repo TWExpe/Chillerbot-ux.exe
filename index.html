@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0f0f14" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Huhu Stream" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Huhu Stream</title>
+</head>
+<body>
+  <!-- Kopfzeile -->
+  <header class="bar" id="bar">
+    <span class="brand">▶ Huhu&nbsp;Stream</span>
+    <div class="bar-actions">
+      <button id="reload" title="Neu laden" aria-label="Neu laden">⟳</button>
+      <button id="open-ext" title="Im Browser öffnen" aria-label="Im Browser öffnen">↗</button>
+    </div>
+  </header>
+
+  <!-- Streaming-Frame -->
+  <main class="stage">
+    <iframe id="frame"
+            title="huhu.to"
+            allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+    <!-- Ladeanzeige -->
+    <div id="loader" class="loader">
+      <div class="spinner"></div>
+      <p>huhu.to wird geladen …</p>
+    </div>
+
+    <!-- Fallback, falls die Seite das Einbetten blockiert -->
+    <div id="fallback" class="fallback hidden">
+      <div class="card">
+        <div class="logo">▶</div>
+        <h1>Huhu Stream</h1>
+        <p>Die Seite lässt sich nicht direkt in der App anzeigen
+           (das ist bei vielen Seiten so). Tippe hier, um huhu.to zu öffnen:</p>
+        <a id="launch" class="btn" href="https://huhu.to/" target="_blank" rel="noopener">
+          Jetzt streamen
+        </a>
+        <button id="retry" class="btn-ghost">Erneut in der App versuchen</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
