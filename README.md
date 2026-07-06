@@ -67,6 +67,7 @@ app.js                  Lade-/Fallback-Logik, Service-Worker-Registrierung
 manifest.webmanifest    PWA-Manifest
 sw.js                   Service Worker (installierbar / offline-startfähig)
 icons/                  App-Icons (m1-Monogramm, 192/512 + maskable)
+tools/generate_icons.py Icon-Generator (Python/Pillow), Farben = Design-Palette
 serve.js                Mini-Testserver ohne Abhängigkeiten
 .github/workflows/      Automatisches Deployment zu GitHub Pages
 ```
